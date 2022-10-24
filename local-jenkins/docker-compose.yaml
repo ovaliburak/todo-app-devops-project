@@ -1,0 +1,20 @@
+version: "3"
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:lts
+    restart: always
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_data:/var/jenkins_home
+    network_mode: minikube
+volumes:
+  jenkins_data:
+
+
+
+

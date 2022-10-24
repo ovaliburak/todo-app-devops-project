@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-web-deployment
+spec:
+  selector:
+    matchLabels:
+      app: server-web-deployment
+  template:
+    metadata:
+      labels:
+        app: server-web-deployment
+    spec:
+      containers:
+      - name: server-web
+        image: docker.io/burakovali/web-server:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000

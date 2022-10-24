@@ -1,0 +1,56 @@
+version: '3'
+services:
+  client:
+    depends_on:
+      - server
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: burakovali/todo_app_client:latest
+    ports:
+      - "3000:3000"
+  server:
+    depends_on:
+      - postgres_db
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    image: burakovali/todo_app_server:latest
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server/:/usr/src/app/
+      - /usr/src/app/node_modules
+  nginx:
+    depends_on:
+      - server
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3050:80"
+  postgres_db:
+    build: 
+      context: ./db
+      dockerfile: Dockerfile
+    image: burakovali/todo_app_db:latest
+    # restart: always
+    # command: -p 5438
+    #env_file:
+    #  - ./server/.env
+    environment:
+      - POSTGRES_PASSWORD=aa0074
+      - POSTGRES_DB=todo_list_penn
+      - POSTGRES_USER=httpdwgp
+      - POSTGRES_PORT=5432
+
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_node:/var/lib/postgresql/data/
+volumes:
+  postgres_data_node:

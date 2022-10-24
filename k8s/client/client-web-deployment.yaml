@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-web-deployment
+spec:
+  selector:
+    matchLabels:
+      app: client-web-deployment
+  template:
+    metadata:
+      labels:
+        app: client-web-deployment
+    spec:
+      containers:
+      - name: client-web
+        image: docker.io/burakovali/web-client:latest
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config		
