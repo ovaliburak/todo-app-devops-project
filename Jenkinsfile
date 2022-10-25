@@ -1,9 +1,9 @@
 pipeline {
-    agent { docker { image 'node' } }
+    agent any
     stages {
-        stage('build') {
+        stage('test') {
             steps {
-                sh 'node --version'
+                echo "ex"
             }
         }
     }
