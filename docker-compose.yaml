@@ -3,7 +3,7 @@ services:
   client:
     depends_on:
       - server_node
-      # - server_django
+      - server_django
     build:
       context: ./frontend/client
       dockerfile: Dockerfile
@@ -12,7 +12,6 @@ services:
       - "80:80"
     volumes:
       - ./frontend/client/nginx:/etc/nginx/conf.d
-   
   server_node:
     depends_on:
       - postgres_db
@@ -42,7 +41,6 @@ services:
       dockerfile: Dockerfile
     image: burakovali/todo_app_db:latest
     restart: always
-   
     env_file:
       - ./backend/db/.env
     expose:
