@@ -5,8 +5,11 @@ metadata:
   namespace: default
 data:
   nginx.conf: |
-    upstream server {
-      server server:5000;
+    upstream server_node {
+      server server_node:5000;
+    }
+    upstream server_django {
+      server server_django:5000;
     }
 
     server {
@@ -24,9 +27,13 @@ data:
       #   proxy_set_header Upgrade $http_upgrade;
       #   proxy_set_header Connection "Upgrade";
       
-      location /server {
+      location /server_node {
         rewrite /server/(.*) /$1 break;
-        proxy_pass http://server;
+        proxy_pass http://server_node;
+    }  
+      location /server_django {
+        rewrite /server/(.*) /$1 break;
+        proxy_pass http://server_django;
     }
       
     

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-web-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx-web-deployment
+  template:
+    metadata:
+      labels:
+        app: nginx-web-deployment
+    spec:
+      containers:
+      - name: nginx-web
+        image: docker.io/burakovali/nginx:latest
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        ports:
+        - containerPort: 80
