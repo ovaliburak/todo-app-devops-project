@@ -15,7 +15,12 @@ I'm trying to combine what I've learned for the CI-CD process. I will advance th
 
 ### Running application with docker-compose
 
+Make sure these ports are empty as they are used on the Nginx and Postgresql default ports (80 and 5432).
+
 ```
 git clone https://github.com/ovaliburak/todo-app-devops-project.git
-```
 cd todo-app-devops-project/
+docker-compose up -d --build
+```
+
+We can now access the application from local. It is running on Node 5000 port, Django running on 8000 port. React is served by Nginx with port 80.
