@@ -1,18 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-deployment
+  name: postgres-test-deployment
+  namespace: test
+  labels:
+    tier: test
+    app: postgresql
 spec:
   selector:
     matchLabels:
-      app: postgres-deployment
+      tier: test 
+      app: postgresql
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
-        app: postgres-deployment
+        tier: test
+        app: postgresql
     spec:
       containers:
-        - name: postgres-deployment
+        - name: postgres-test
           image: postgres
           resources:
             limits:
@@ -21,18 +29,18 @@ spec:
           env:
             - name: POSTGRES_PASSWORD
               value: aa0074
-          
+           
             - name: POSTGRES_DB
               value: todo_list_penn 
-          
+           
             - name: POSTGRES_USER
               value: httpdwgp
           ports:
             - containerPort: 5432
           volumeMounts:
-            - name: postgres-volume-mount
+            - name: postgres-test-pv
               mountPath: /var/lib/postgresql/data
       volumes:
-        - name: postgres-volume-mount
+        - name: postgres-test-pv
           persistentVolumeClaim:
-            claimName: postgres-pvc
+            claimName: postgres-test-claim

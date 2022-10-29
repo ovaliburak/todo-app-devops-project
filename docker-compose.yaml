@@ -2,8 +2,8 @@ version: '3'
 services:
   client:
     depends_on:
-      - server_node
-      - server_django
+      - server-node
+      - server-django
     build:
       context: ./frontend/client
       dockerfile: Dockerfile
@@ -12,30 +12,30 @@ services:
       - "80:80"
     volumes:
       - ./frontend/client/nginx:/etc/nginx/conf.d
-  server_node:
+  server-node:
     depends_on:
-      - postgres_db
+      - postgres-service
     build: 
       context: ./backend/node
       dockerfile: Dockerfile
-    image: burakovali/server_node:latest
+    image: burakovali/server-node:latest
     ports:
       - "5000:5000"
     volumes:
       - ./backend/node/:/usr/src/app/
       - /usr/src/app/node_modules
-  server_django:
+  server-django:
     depends_on:
-      - postgres_db
-      - server_node
+      - postgres-service
+      - server-node
     build: 
       context: ./backend/django
       dockerfile: Dockerfile
-    image: burakovali/server_django:latest
+    image: burakovali/server-django:latest
     ports:
       - "8000:8000"
     command: sh -c "chmod +x /app/migrate.sh && sh /app/migrate.sh && /app/entrypoint.sh"
-  postgres_db:
+  postgres-service:
     build: 
       context: ./backend/db
       dockerfile: Dockerfile

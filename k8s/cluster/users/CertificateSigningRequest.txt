@@ -1,0 +1,29 @@
+cat <<EOF | kubectl apply -f -
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: junior
+spec:
+  groups:
+  - system:authenticated
+  request: $(cat junior.csr | base64 | tr -d "\n")
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+  - client auth
+EOF
+
+--- 
+
+cat <<EOF | kubectl apply -f -
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: senior
+spec:
+  groups:
+  - system:authenticated
+  request: $(cat senior.csr | base64 | tr -d "\n")
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+  - client auth
+EOF

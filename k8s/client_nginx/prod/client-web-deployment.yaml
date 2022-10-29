@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+  namespace: prod
+  labels:
+    tier: prod
+    labels: client-deployment
+spec:
+  selector:
+    matchLabels:
+      tier: prod
+      app: client-deployment
+  template:
+    metadata:
+      labels:
+        tier: prod
+        app: client-deployment
+    spec:
+      containers:
+      - name: client
+        image: docker.io/burakovali/client:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+      # nodeSelector:
+      #   tier: prod
+      # tolerations:
+      #   - key: "tier"
+      #     operator: "Equal"
+      #     value: "prod"
+      #     effect: "NoSchedule"
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config		

@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: prod
+data:
+  default.conf: |
+    upstream server-node {
+      server server-node:5000;
+    }
+    upstream server-django {
+      server server-django:8000;
+    }
+
+    server {
+      listen 80;
+    
+      location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+        try_files $uri $uri/ /index.html;
+      }
+
+      
+      location /server-node {
+        rewrite /server-node/(.*) /$1 break;
+        proxy_pass http://server-node;
+    }  
+      location /server-django {
+        rewrite //server-django/(.*) /$1 break;
+        proxy_pass http://server-django;
+    }
+      
+    
+    
+      error_page   500 502 503 504  /50x.html;
+    
+      location = /50x.html {
+        root   /usr/share/nginx/html;
+      }
+    }
+    
+    
+    
+    
+    
+    
+    
+  
+    

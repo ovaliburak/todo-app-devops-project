@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-node
+  namespace: prod
+  labels:
+    tier: prod
+    app: server-node
+spec:
+  selector:
+    matchLabels:
+      tier: prod
+      app: server-node
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        tier: prod
+        app: server-node
+    spec:
+      containers:
+      - name: server-node
+        image: docker.io/burakovali/server-node:latest
+        env:
+          - name: POSTGRES_PORT
+            value: '5432'
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
+      # nodeSelector:
+      #   tier: prod
+      # tolerations:
+      #   - key: "tier"
+      #     operator: "Equal"
+      #     value: "prod"
+      #     effect: "NoSchedule"
+      #   - key: "service"
+      #     operator: "Equal"
+      #     value: "nodejs"
+      #     effect: "NoSchedule"

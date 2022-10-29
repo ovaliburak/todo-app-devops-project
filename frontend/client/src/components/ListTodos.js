@@ -6,7 +6,7 @@ const ListTodos = () => {
 
   const deleteTodo = async id => {
     try {
-      const deleteTodo = await fetch(`/server_django/delete/${id}/`, {
+      const deleteTodo = await fetch(`/server-django/delete/${id}/`, {
         method: "DELETE"
       });
 
@@ -18,7 +18,7 @@ const ListTodos = () => {
 
   const getTodos = async () => {
     try {
-      const response = await fetch("/server_node/todos");
+      const response = await fetch("/server-node/todos");
       const jsonData = await response.json();
 
       setTodos(jsonData);

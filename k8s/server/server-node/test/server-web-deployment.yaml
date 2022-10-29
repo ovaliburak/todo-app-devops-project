@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: server-web
-        image: docker.io/burakovali/web-server:latest
+        image: docker.io/burakovali/server-node:latest
         resources:
           limits:
             memory: "128Mi"

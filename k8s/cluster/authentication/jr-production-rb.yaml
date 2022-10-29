@@ -1,13 +1,13 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: sr-test-rb
-  namespace: test
+  name: jr-production-rb
+  namespace: prod
 subjects:
-- kind: Group
-  name: senior
+- kind: User
+  name: junior@team.in
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
-  name: edit
+  name: view
   apiGroup: rbac.authorization.k8s.io

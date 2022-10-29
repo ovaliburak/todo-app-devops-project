@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-test-service
+  namespace: test
+  labels:
+    tier: test
+    app: postgresql
+spec:
+  selector:
+    tier: test
+    app: postgres-test-deployment
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql
+  namespace: prod
+  labels:
+    tier: prod
+    app: postgresql
+spec:
+  selector:
+    matchLabels:
+      tier: prod 
+      app: postgresql
+  template:
+    metadata:
+      labels:
+        tier: prod
+        app: postgresql
+    spec:
+      containers:
+      - name: postgres-prod
+        image: postgres
+        env:
+        - name: POSTGRES_PASSWORD
+          value: aa0074
+        - name: POSTGRES_DB
+          value: todo_list_penn 
+        - name: POSTGRES_USER
+          value: httpdwgp
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - name: postgres-prod-pv
+            mountPath: /var/lib/postgresql/data
+      # nodeSelector:
+      #   tier: prod
+      # tolerations:
+      # - key: "tier"
+      #   operator: "Equal"
+      #   value: "prod"
+      #   effect: "NoSchedule"
+      volumes:
+        - name: postgres-prod-pv
+          persistentVolumeClaim:
+            claimName: postgres-prod-claim

@@ -1,12 +1,13 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
-  name: sr-cluster-crb
+  name: jr-test-rb
+  namespace: test
 subjects:
-- kind: Group
-  name: senior
+- kind: User
+  name: junior@team.in
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
-  name: view
+  name: edit
   apiGroup: rbac.authorization.k8s.io
