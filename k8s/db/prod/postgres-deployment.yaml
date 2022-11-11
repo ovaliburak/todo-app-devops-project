@@ -32,7 +32,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-          - containerPort: 5432
+          - containerPort: 25060
         volumeMounts:
           - name: postgres-prod-pv
             mountPath: /var/lib/postgresql/data

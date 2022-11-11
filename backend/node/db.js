@@ -11,6 +11,9 @@ const pool = new Pool({
   user: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
+  port: process.env.POSTGRES_PORT,
+  ssl:true
+
 });
 
 // const pool = new Pool({
@@ -18,7 +21,7 @@ const pool = new Pool({
 //   user: 'httpdwgp',
 //   password: 'aa0074',
 //   database: 'todo_list_penn',
-//   port: 5432,
+//   port: 25060,
 // });
 
 module.exports = pool;

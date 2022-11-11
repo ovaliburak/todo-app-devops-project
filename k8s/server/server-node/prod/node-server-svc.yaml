@@ -4,6 +4,7 @@ metadata:
   name: server-node
   namespace: prod
 spec:
+  type: ClusterIP
   selector:
     app: server-node
   ports:

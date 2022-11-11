@@ -22,10 +22,10 @@ spec:
       containers:
       - name: server-django
         image: docker.io/burakovali/server-django:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
         ports:
         - containerPort: 8000
       # nodeSelector:

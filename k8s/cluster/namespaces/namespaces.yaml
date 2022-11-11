@@ -13,3 +13,21 @@ metadata:
   name: prod
   labels:
     name: prod
+
+---
+
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: jenkins
+  labels:
+    name: jenkins
+
+---
+
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: argocd
+  labels:
+    name: argocd

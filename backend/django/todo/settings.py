@@ -76,6 +76,7 @@ if DB_IS_AVAILABLE:
         'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,
         'PORT': DB_PORT,
+        'OPTIONS': {'sslmode': 'required'},
     }
 }
 
@@ -87,7 +88,7 @@ if DB_IS_AVAILABLE:
 #         'USER': 'httpdwgp',
 #         'PASSWORD': '0074',
 #         'HOST': 'localhost',
-#         'PORT': 5432      
+#         'PORT': 25060      
 #         }
 # }
 

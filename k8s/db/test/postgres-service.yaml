@@ -12,5 +12,5 @@ spec:
     app: postgres-test-deployment
   ports:
   - protocol: TCP
-    port: 5432
-    targetPort: 5432
+    port: 25060
+    targetPort: 25060

@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/git,react,venv,database,node,django,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=git,react,venv,database,node,django,python
-
+/key-crt
+./key-crt
 ### Database ###
 *.accdb
 *.db

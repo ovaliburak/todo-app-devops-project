@@ -15,7 +15,7 @@ I'm trying to combine what I've learned for the CI-CD process. I will advance th
 
 ### Running application with docker-compose
 
-Make sure these ports are empty as they are used on the Nginx and Postgresql default ports (80 and 5432).
+Make sure these ports are empty as they are used on the Nginx and Postgresql default ports (80 and 25060).
 
 ```
 git clone https://github.com/ovaliburak/todo-app-devops-project.git

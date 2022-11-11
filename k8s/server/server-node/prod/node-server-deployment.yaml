@@ -22,13 +22,13 @@ spec:
       containers:
       - name: server-node
         image: docker.io/burakovali/server-node:latest
-        env:
-          - name: POSTGRES_PORT
-            value: '5432'
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        # env:
+        #   - name: POSTGRES_PORT
+        #     value: '25060'
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
         ports:
         - containerPort: 5000
       # nodeSelector:
